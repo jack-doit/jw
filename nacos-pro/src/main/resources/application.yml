@@ -1,0 +1,9 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: mayikt-member  #服务名称 在 注册中心展示服务名称 --
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848 # nacos服务注册中心Server端 地址

@@ -1,0 +1,15 @@
+server:
+  port: 8080
+eureka:
+  client:
+    serviceUrl: #服务注册中心接口地址
+      defaultZone: http://127.0.0.1:9090/eureka/
+  instance:
+    #心跳检测与续约时间（开发环境可以将值设小一点，保证服务关闭后注册中心能及时剔除）
+    lease-expiration-duration-in-seconds: 15
+    #Eureka客户端向服务端发送心跳的时间间隔，单位为秒（客户端告诉服务端自己会遵循该规则）
+    lease-renewal-interval-in-seconds: 5
+spring:
+  #服务名称--调用的时候根据名称来调用该服务的方法
+  application:
+    name: mayikt-member
