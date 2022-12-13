@@ -2,11 +2,13 @@ package com.example.cc.controller;
 
 import com.example.cc.balance.RandomLoadBalance;
 import com.example.cc.balance.RoundLoadBalance;
+import com.example.cc.balance.WeightBalance;
 import com.example.cc.utils.HttpClientUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClientException;
@@ -25,6 +27,10 @@ public class ConController {
     private RandomLoadBalance randomLoadBalance;
     @Autowired
     private RestTemplate restTemplate;
+    @Autowired
+    private WeightBalance weightBalance;
+    @Autowired
+    private LoadBalancerClient loadBalancerClient;
 
     @RequestMapping("/getService")
     public String getService(){
@@ -54,6 +60,18 @@ public class ConController {
         String memberUrl = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/" + "getMember";
         return "订单服务调用会员服务:" + HttpClientUtils.doGet(memberUrl, null);
     }
+    @RequestMapping("/getBalanceThree")
+    public String getBalanceThree(){
+        ServiceInstance serviceInstance = weightBalance.getInstances("mayikt-member");
+        String memberUrl = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/" + "getMember";
+        return "订单服务调用会员服务:" + HttpClientUtils.doGet(memberUrl, null);
+    }
+    @RequestMapping("/getBalanceFour")
+    public String getBalanceFour(){
+        ServiceInstance serviceInstance = loadBalancerClient.choose("mayikt-member");//默认采用轮询机制
+        String memberUrl = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/" + "getMember";
+        return "订单服务调用会员服务:" + HttpClientUtils.doGet(memberUrl, null);
+    }
 
     @RequestMapping("/downService")
     public String downService() {
@@ -69,5 +87,7 @@ public class ConController {
         }
         return "fail";
     }
+
+
 
 }
