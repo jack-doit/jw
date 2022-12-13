@@ -7,17 +7,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="consumer" />
-        <module name="nacos-con" />
         <module name="nacos-pro" />
-        <module name="producer" />
+        <module name="nacos-config" />
+        <module name="nacos-con" />
         <module name="eureka" />
+        <module name="producer" />
+        <module name="consumer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="consumer" target="8" />
       <module name="eureka" target="8" />
       <module name="nacos-con" target="8" />
+      <module name="nacos-config" target="8" />
       <module name="nacos-pro" target="8" />
       <module name="producer" target="8" />
     </bytecodeTargetLevel>
@@ -27,6 +29,7 @@
       <module name="consumer" options="-parameters" />
       <module name="eureka" options="-parameters" />
       <module name="nacos-con" options="-parameters" />
+      <module name="nacos-config" options="-parameters" />
       <module name="nacos-pro" options="-parameters" />
       <module name="producer" options="-parameters" />
     </option>

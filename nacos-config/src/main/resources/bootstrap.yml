@@ -1,0 +1,17 @@
+server:
+  port: 8010
+spring:
+  application:
+    ###服务的名称
+    name: mayikt-client
+  cloud:
+    nacos:
+      config:
+        ###配置中心连接地址
+        server-addr: 127.0.0.1:8848
+        ###分组
+        group: DEFAULT_GROUP
+        ###类型
+        file-extension: yml
+
+
